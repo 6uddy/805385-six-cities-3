@@ -5,8 +5,8 @@
   "description": "Личный проект «Шесть городов» от HTML Academy",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open google-chrome",
-    "eslint": "eslint src/**/*.js",
+    "start": "webpack-dev-server --port 8081 --open google-chrome",
+    "eslint": "eslint --ext .jsx --ext .js src/",
     "test": "npm run eslint"
   },
   "devDependencies": {
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "react": "16.12.0",
-    "react-dom": "16.12.0"
+    "react-dom": "16.12.0",
+    "prop-types": "15.7.2"
   }
 }
