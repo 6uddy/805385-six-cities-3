@@ -8,8 +8,8 @@ const Settings = {
 };
 
 ReactDOM.render(
-  <App
-    offers={Settings.OFFERS}
-  />,
-  document.querySelector(`#root`)
+    <App
+      offers={Settings.OFFERS}
+    />,
+    document.querySelector(`#root`)
 );
