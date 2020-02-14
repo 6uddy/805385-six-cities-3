@@ -2,13 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Main} from '../main/main.jsx';
 
+const headingHandler = () => {
+};
+
 export const App = ({offersAmount, offersNames}) => {
 
   return (
     <React.Fragment>
       <Main
-        offersAmount = {offersAmount}
-        offersNames = {offersNames}
+        offersAmount={offersAmount}
+        offersNames={offersNames}
+        headingHandler={headingHandler}
       />
     </React.Fragment>
   );

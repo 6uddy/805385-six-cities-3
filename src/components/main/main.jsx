@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Card} from "../card/card.jsx";
 
-export const Main = ({offersAmount, offersNames}) => {
+export const Main = ({offersAmount, offersNames, headingHandler}) => {
 
   // Key временное решение
   const cards = offersNames.map((name) => <Card offerName={name} key={Math.random()}/>);
@@ -33,7 +33,7 @@ export const Main = ({offersAmount, offersNames}) => {
       </header>
 
       <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
+        <h1 className="visually-hidden" onClick={headingHandler}>Cities</h1>
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
@@ -73,7 +73,7 @@ export const Main = ({offersAmount, offersNames}) => {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
+              <h2 className="visually-hidden" onClick={headingHandler}>Places</h2>
               <b className="places__found">{offersAmount} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -106,5 +106,6 @@ export const Main = ({offersAmount, offersNames}) => {
 
 Main.propTypes = {
   offersAmount: PropTypes.number.isRequired,
-  offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  headingHandler: PropTypes.func.isRequired
 };
