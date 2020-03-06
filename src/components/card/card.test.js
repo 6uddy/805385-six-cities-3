@@ -5,13 +5,12 @@ import {Card} from "./card.jsx";
 const offerName = `Beautiful &amp; luxurious apartment at great location`;
 
 it(`Render card`, () => {
-  const onNameClick = jest.fn();
 
   const tree = renderer
     .create(
         <Card
           offerName={offerName}
-          onNameClick={onNameClick}
+          onUpdateState = {() => {}}
         />
     )
     .toJSON();

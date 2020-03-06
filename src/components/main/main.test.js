@@ -12,14 +12,12 @@ const Settings = {
 };
 
 it(`Render main`, () => {
-  const headingHandler = jest.fn();
-
   const tree = renderer
     .create(
         <Main
           offersAmount={Settings.OFFERS}
           offersNames={Settings.OFFERS_NAMES}
-          headingHandler={headingHandler}
+          headingHandler = {() => {}}
         />
     )
     .toJSON();

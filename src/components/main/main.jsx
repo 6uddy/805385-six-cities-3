@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Card} from "../card/card.jsx";
+import {CardList} from '../card-list/card-list.jsx';
 
 export const Main = ({offersAmount, offersNames, headingHandler}) => {
-
-  // Key временное решение
-  const cards = offersNames.map((name) => <Card offerName={name} key={Math.random()}/>);
 
   return (
     <div className="page page--gray page--main">
@@ -90,9 +87,9 @@ export const Main = ({offersAmount, offersNames, headingHandler}) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {cards}
-              </div>
+              <CardList
+                offersNames = {offersNames}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"/>
