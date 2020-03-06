@@ -10,7 +10,8 @@ it(`Render card`, () => {
     .create(
         <Card
           offerName={offerName}
-          onUpdateState = {() => {}}
+          onOfferMouseInteract = {() => {}}
+          onCardHeadingClick = {() => {}}
         />
     )
     .toJSON();

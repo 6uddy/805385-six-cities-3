@@ -13,6 +13,7 @@ it(`CardList component structure test`, () => {
   .create(
       <CardList
         offersNames={OFFERS_NAMES}
+        onCardHeadingClick = {() => {}}
       />
   ).toJSON();
 

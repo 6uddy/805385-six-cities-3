@@ -9,13 +9,7 @@ export class CardList extends React.PureComponent {
     this.state = {
       activeItemData: null
     };
-    this.onUpdateState = this.onUpdateState.bind(this);
-  }
-
-  onUpdateState(activeItemData) {
-    this.setState({
-      activeItemData
-    });
+    this.onOfferMouseInteract = this.onOfferMouseInteract.bind(this);
   }
 
   render() {
@@ -24,15 +18,24 @@ export class CardList extends React.PureComponent {
         {
           this.props.offersNames.map((name) => <Card
             offerName={name}
-            onUpdateState={this.onUpdateState}
+            onOfferMouseInteract = {this.onOfferMouseInteract}
+            onCardHeadingClick = {this.props.onCardHeadingClick}
             key={Math.random()}
           />)
         }
       </div>
     );
   }
+
+
+  onOfferMouseInteract(activeItemData) {
+    this.setState({
+      activeItemData
+    });
+  }
 }
 
 CardList.propTypes = {
-  offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onCardHeadingClick: PropTypes.func.isRequired
 };

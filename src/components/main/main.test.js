@@ -17,7 +17,7 @@ it(`Render main`, () => {
         <Main
           offersAmount={Settings.OFFERS}
           offersNames={Settings.OFFERS_NAMES}
-          headingHandler = {() => {}}
+          onCardHeadingClick = {() => {}}
         />
     )
     .toJSON();
