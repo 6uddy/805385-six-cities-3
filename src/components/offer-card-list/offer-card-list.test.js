@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {CardList} from './card-list.jsx';
+import {OfferCardList} from './offer-card-list.jsx';
 
 const OFFERS_NAMES = [`Beautiful & luxurious apartment at great location`,
   `Wood and stone place`,
@@ -11,7 +11,7 @@ const OFFERS_NAMES = [`Beautiful & luxurious apartment at great location`,
 it(`CardList component structure test`, () => {
   const tree = renderer
   .create(
-      <CardList
+      <OfferCardList
         offersNames={OFFERS_NAMES}
         onCardHeadingClick = {() => {}}
       />

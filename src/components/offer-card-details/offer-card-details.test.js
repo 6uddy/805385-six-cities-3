@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {CardDetails} from './card-details.jsx';
+import {OfferCardDetails} from './offer-card-details.jsx';
 
 const OFFER_NAME = `Party apartment`;
 
 it(`CardDetails component structure test`, () => {
   const tree = renderer
   .create(
-      <CardDetails
+      <OfferCardDetails
         offerName = {OFFER_NAME}
       />
   ).toJSON();

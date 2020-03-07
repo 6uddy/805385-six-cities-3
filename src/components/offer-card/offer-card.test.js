@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Card} from "./card.jsx";
+import {OfferCard} from "./offer-card.jsx";
 
 const offerName = `Beautiful &amp; luxurious apartment at great location`;
 
@@ -8,7 +8,7 @@ it(`Render card`, () => {
 
   const tree = renderer
     .create(
-        <Card
+        <OfferCard
           offerName={offerName}
           onOfferMouseInteract = {() => {}}
           onCardHeadingClick = {() => {}}

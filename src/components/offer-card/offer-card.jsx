@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export class Card extends React.PureComponent {
+export class OfferCard extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -58,7 +58,7 @@ export class Card extends React.PureComponent {
   }
 }
 
-Card.propTypes = {
+OfferCard.propTypes = {
   offerName: PropTypes.string.isRequired,
   onOfferMouseInteract: PropTypes.func.isRequired,
   onCardHeadingClick: PropTypes.func.isRequired

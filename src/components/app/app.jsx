@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Main} from '../main/main.jsx';
-import {CardDetails} from '../card-details/card-details.jsx';
+import {OfferCardDetails} from '../offer-card-details/offer-card-details.jsx';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 export class App extends React.PureComponent {
@@ -20,7 +20,7 @@ export class App extends React.PureComponent {
             {this.getScreen()}
           </Route>
           <Route exact path="/offer">
-            <CardDetails
+            <OfferCardDetails
               offerName = {this.state.selectedCardName}
             />
           </Route>
@@ -32,7 +32,7 @@ export class App extends React.PureComponent {
   getScreen() {
     let component = null;
     if (this.state.selectedCardName) {
-      component = <CardDetails
+      component = <OfferCardDetails
         offerName = {this.state.selectedCardName}
       />;
     } else {

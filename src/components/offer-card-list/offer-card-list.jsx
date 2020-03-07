@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Card} from '../card/card.jsx';
+import {OfferCard} from '../offer-card/offer-card.jsx';
 
 
-export class CardList extends React.PureComponent {
+export class OfferCardList extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +16,7 @@ export class CardList extends React.PureComponent {
     return (
       <div className="cities__places-list places__list tabs__content">
         {
-          this.props.offersNames.map((name) => <Card
+          this.props.offersNames.map((name) => <OfferCard
             offerName={name}
             onOfferMouseInteract = {this.onOfferMouseInteract}
             onCardHeadingClick = {this.props.onCardHeadingClick}
@@ -35,7 +35,7 @@ export class CardList extends React.PureComponent {
   }
 }
 
-CardList.propTypes = {
+OfferCardList.propTypes = {
   offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onCardHeadingClick: PropTypes.func.isRequired
 };

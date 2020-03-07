@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const CardDetails = ({offerName}) => {
+export const OfferCardDetails = ({offerName}) => {
   return (
     <div className="page">
       <header className="header">
@@ -327,6 +327,6 @@ export const CardDetails = ({offerName}) => {
   );
 };
 
-CardDetails.propTypes = {
+OfferCardDetails.propTypes = {
   offerName: PropTypes.string
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzume, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {Card} from './card.jsx';
+import {OfferCard} from './offer-card.jsx';
 
 const OFFER_NAME = `Residence`;
 
@@ -13,7 +13,7 @@ it(`Card component e2e test`, () => {
   const handleMouseEnter = jest.fn();
   const handleHeadingHandler = jest.fn();
   const card = shallow(
-      <Card
+      <OfferCard
         offerName = {OFFER_NAME}
         onOfferMouseInteract = {handleMouseEnter}
         onCardHeadingClick = {handleHeadingHandler}

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {CardList} from '../card-list/card-list.jsx';
+import {OfferCardList} from '../offer-card-list/offer-card-list.jsx';
 
 export const Main = ({offersAmount, offersNames, onCardHeadingClick}) => {
 
@@ -87,7 +87,7 @@ export const Main = ({offersAmount, offersNames, onCardHeadingClick}) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <CardList
+              <OfferCardList
                 offersNames = {offersNames}
                 onCardHeadingClick = {onCardHeadingClick}
               />
