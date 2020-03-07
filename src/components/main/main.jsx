@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {OfferCardList} from '../offer-card-list/offer-card-list.jsx';
+import {Map} from '../map/map.jsx';
 
-export const Main = ({offersAmount, offersNames, onCardHeadingClick}) => {
+
+export const Main = ({offersAmount, offersNames, onCardHeadingClick, offerCoords}) => {
 
   return (
     <div className="page page--gray page--main">
@@ -93,7 +95,11 @@ export const Main = ({offersAmount, offersNames, onCardHeadingClick}) => {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"/>
+              <section className="cities__map map">
+                <Map
+                  offerCoords = {offerCoords}
+                />
+              </section>
             </div>
           </div>
         </div>
@@ -105,5 +111,6 @@ export const Main = ({offersAmount, offersNames, onCardHeadingClick}) => {
 Main.propTypes = {
   offersAmount: PropTypes.number.isRequired,
   offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  onCardHeadingClick: PropTypes.func.isRequired
+  onCardHeadingClick: PropTypes.func.isRequired,
+  offerCoords: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number.isRequired)).isRequired
 };

@@ -22,6 +22,7 @@ export class App extends React.PureComponent {
           <Route exact path="/offer">
             <OfferCardDetails
               offerName = {this.state.selectedCardName}
+              offerCoords = {this.props.offerCoords}
             />
           </Route>
         </Switch>
@@ -34,12 +35,14 @@ export class App extends React.PureComponent {
     if (this.state.selectedCardName) {
       component = <OfferCardDetails
         offerName = {this.state.selectedCardName}
+        offerCoords = {this.props.offerCoords}
       />;
     } else {
       component = <Main
         offersAmount = {this.props.offersAmount}
         offersNames = {this.props.offersNames}
         onCardHeadingClick = {this.onCardHeadingClick}
+        offerCoords = {this.props.offerCoords}
       />;
     }
     return component;
@@ -54,5 +57,6 @@ export class App extends React.PureComponent {
 
 App.propTypes = {
   offersAmount: PropTypes.number.isRequired,
-  offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  offerCoords: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number.isRequired)).isRequired
 };

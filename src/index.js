@@ -7,6 +7,7 @@ ReactDOM.render(
     <App
       offersAmount={Settings.OFFERS}
       offersNames={Settings.OFFERS_NAMES}
+      offerCoords = {Settings.COORDINATES}
     />,
     document.querySelector(`#root`)
 );
