@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {OfferCardList} from '../offer-card-list/offer-card-list.jsx';
+import {OffersCardList} from '../offer-card-list/offer-card-list.jsx';
 import {Map} from '../map/map.jsx';
 
 
-export const Main = ({offersAmount, offersNames, onCardHeadingClick, offerCoords}) => {
+export const Main = ({offers, onCardHeadingClick}) => {
 
   return (
     <div className="page page--gray page--main">
@@ -73,7 +73,7 @@ export const Main = ({offersAmount, offersNames, onCardHeadingClick, offerCoords
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersAmount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -89,15 +89,15 @@ export const Main = ({offersAmount, offersNames, onCardHeadingClick, offerCoords
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <OfferCardList
-                offersNames = {offersNames}
+              <OffersCardList
+                offers = {offers}
                 onCardHeadingClick = {onCardHeadingClick}
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  offerCoords = {offerCoords}
+                  offers = {offers}
                 />
               </section>
             </div>
@@ -109,8 +109,27 @@ export const Main = ({offersAmount, offersNames, onCardHeadingClick, offerCoords
 };
 
 Main.propTypes = {
-  offersAmount: PropTypes.number.isRequired,
-  offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  onCardHeadingClick: PropTypes.func.isRequired,
-  offerCoords: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number.isRequired)).isRequired
+  offers: PropTypes.arrayOf(
+      PropTypes.exact({
+        name: PropTypes.string.isRequired,
+        coordinates: PropTypes.arrayOf(
+            PropTypes.number.isRequired
+        ).isRequired,
+        id: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        premium: PropTypes.bool.isRequired,
+        isFavorites: PropTypes.bool.isRequired,
+        rating: PropTypes.number.isRequired,
+        reviews: PropTypes.arrayOf(
+            PropTypes.exact({
+              author: PropTypes.string.isRequired,
+              review: PropTypes.string.isRequired,
+              userRating: PropTypes.number.isRequired,
+              date: PropTypes.string.isRequired
+            }).isRequired
+        ).isRequired
+      }).isRequired
+  ).isRequired,
+  onCardHeadingClick: PropTypes.func.isRequired
 };

@@ -2,39 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {OfferCard} from '../offer-card/offer-card.jsx';
 
-const RENDER_MODE_TO_MAIN = `toMain`;
+const RENDER_MODE_TO_NEAR = `toNear`;
 
-export class OffersCardList extends React.PureComponent {
+export class NearPlacesList extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      activeItemData: null
-    };
-    this.onOfferMouseInteract = this.onOfferMouseInteract.bind(this);
   }
+
   render() {
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className="near-places__list places__list">
         {
           this.props.offers.map((offerItem) => <OfferCard
             offer = {offerItem}
-            onOfferMouseInteract = {this.onOfferMouseInteract}
+            onOfferMouseInteract = {() => {}}
             onCardHeadingClick = {this.props.onCardHeadingClick}
             key = {offerItem.id}
-            renderMode = {RENDER_MODE_TO_MAIN}
+            renderMode = {RENDER_MODE_TO_NEAR}
           />)
         }
       </div>
     );
   }
-  onOfferMouseInteract(activeItemData) {
-    this.setState({
-      activeItemData
-    });
-  }
 }
 
-OffersCardList.propTypes = {
+NearPlacesList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.exact({
         name: PropTypes.string.isRequired,
@@ -57,5 +49,6 @@ OffersCardList.propTypes = {
         ).isRequired
       }).isRequired
   ).isRequired,
-  onCardHeadingClick: PropTypes.func.isRequired
+  onCardHeadingClick: PropTypes.func.isRequired,
+  onOfferMouseInteract: PropTypes.func
 };

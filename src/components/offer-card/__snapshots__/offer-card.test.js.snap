@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render card 1`] = `
+exports[`OfferCard component structure test 1`] = `
 <article
   className="cities__place-card place-card"
   onMouseEnter={[Function]}
@@ -40,7 +40,8 @@ exports[`Render card 1`] = `
         <b
           className="place-card__price-value"
         >
-          €120
+          €
+          145
         </b>
         <span
           className="place-card__price-text"
@@ -49,7 +50,7 @@ exports[`Render card 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="place-card__bookmark-button place-card__bookmark-button--active button"
         type="button"
       >
         <svg
@@ -77,7 +78,7 @@ exports[`Render card 1`] = `
         <span
           style={
             Object {
-              "width": "80%",
+              "width": "60%",
             }
           }
         />
@@ -95,13 +96,13 @@ exports[`Render card 1`] = `
       <a
         href="#"
       >
-        Beautiful &amp; luxurious apartment at great location
+        Nice, cozy, warm big bed apartment
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Apartment
+      Lux apartment
     </p>
   </div>
 </article>

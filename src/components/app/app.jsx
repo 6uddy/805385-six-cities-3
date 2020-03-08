@@ -8,21 +8,23 @@ export class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      selectedCardName: null
+      selectedOffer: null
     };
     this.onCardHeadingClick = this.onCardHeadingClick.bind(this);
   }
+
   render() {
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {this.getScreen()}
+            {this.screen}
           </Route>
           <Route exact path="/offer">
             <OfferCardDetails
-              offerName = {this.state.selectedCardName}
-              offerCoords = {this.props.offerCoords}
+              offerCurrent={this.state.selectedOffer}
+              offers={this.props.offers}
+              onCardHeadingClick={this.onCardHeadingClick}
             />
           </Route>
         </Switch>
@@ -30,33 +32,48 @@ export class App extends React.PureComponent {
     );
   }
 
-  getScreen() {
-    let component = null;
-    if (this.state.selectedCardName) {
-      component = <OfferCardDetails
-        offerName = {this.state.selectedCardName}
-        offerCoords = {this.props.offerCoords}
-      />;
-    } else {
-      component = <Main
-        offersAmount = {this.props.offersAmount}
-        offersNames = {this.props.offersNames}
-        onCardHeadingClick = {this.onCardHeadingClick}
-        offerCoords = {this.props.offerCoords}
+  get screen() {
+    if (this.state.selectedOffer) {
+      return <OfferCardDetails
+        offerCurrent={this.state.selectedOffer}
+        offers={this.props.offers}
+        onCardHeadingClick={this.onCardHeadingClick}
       />;
     }
-    return component;
+    return <Main
+      offers={this.props.offers}
+      onCardHeadingClick={this.onCardHeadingClick}
+    />;
   }
 
-  onCardHeadingClick(selectedCardName) {
+  onCardHeadingClick(selectedOffer) {
     this.setState({
-      selectedCardName
+      selectedOffer
     });
   }
 }
 
 App.propTypes = {
-  offersAmount: PropTypes.number.isRequired,
-  offersNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  offerCoords: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number.isRequired)).isRequired
+  offers: PropTypes.arrayOf(
+      PropTypes.exact({
+        name: PropTypes.string.isRequired,
+        coordinates: PropTypes.arrayOf(
+            PropTypes.number.isRequired
+        ).isRequired,
+        id: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        premium: PropTypes.bool.isRequired,
+        isFavorites: PropTypes.bool.isRequired,
+        rating: PropTypes.number.isRequired,
+        reviews: PropTypes.arrayOf(
+            PropTypes.exact({
+              author: PropTypes.string.isRequired,
+              review: PropTypes.string.isRequired,
+              userRating: PropTypes.number.isRequired,
+              date: PropTypes.string.isRequired
+            }).isRequired
+        ).isRequired
+      }).isRequired
+  ).isRequired
 };

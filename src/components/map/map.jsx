@@ -4,10 +4,6 @@ import leaflet from 'leaflet';
 
 const MapSetting = {
   CITY: [52.38333, 4.9],
-  ICON: leaflet.icon({
-    iconUrl: `img/pin.svg`,
-    iconSize: [30, 30]
-  }),
   ZOOM: 12
 };
 
@@ -18,7 +14,7 @@ export class Map extends React.PureComponent {
   }
   componentDidMount() {
     if (this.map.current) {
-      this.mapInit(this.map.current);
+      this._mapInit(this.map.current);
     }
   }
   render() {
@@ -26,7 +22,13 @@ export class Map extends React.PureComponent {
       <div id="map" style={{height: `100%`}} ref={this.map}></div>
     );
   }
-  mapInit(mapCurrent) {
+  getPin(offer) {
+    return leaflet.icon({
+      iconUrl: this.props.offerCurrent && offer.id === this.props.offerCurrent.id ? `img/pin-active.svg` : `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+  }
+  _mapInit(mapCurrent) {
     if (!mapCurrent) {
       throw new Error(`no mapCurrent`);
     }
@@ -42,16 +44,57 @@ export class Map extends React.PureComponent {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(map);
-    this.props.offerCoords.forEach((coordinates) => {
+    this.props.offers.forEach((offerItem) => {
       leaflet
-        .marker(coordinates, {icon: MapSetting.ICON})
+        .marker(offerItem.coordinates, {icon: this.getPin(offerItem)})
         .addTo(map);
     });
   }
 }
 
 Map.propTypes = {
-  offerCoords: PropTypes.arrayOf(
-      PropTypes.arrayOf(PropTypes.number.isRequired)
-  ).isRequired
+  offers: PropTypes.arrayOf(
+      PropTypes.exact({
+        name: PropTypes.string.isRequired,
+        coordinates: PropTypes.arrayOf(
+            PropTypes.number.isRequired
+        ).isRequired,
+        id: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        premium: PropTypes.bool.isRequired,
+        isFavorites: PropTypes.bool.isRequired,
+        rating: PropTypes.number.isRequired,
+        activePin: PropTypes.bool,
+        reviews: PropTypes.arrayOf(
+            PropTypes.exact({
+              author: PropTypes.string.isRequired,
+              review: PropTypes.string.isRequired,
+              userRating: PropTypes.number.isRequired,
+              date: PropTypes.string.isRequired
+            }).isRequired
+        ).isRequired
+      }).isRequired
+  ).isRequired,
+  offerCurrent: PropTypes.exact({
+    name: PropTypes.string.isRequired,
+    coordinates: PropTypes.arrayOf(
+        PropTypes.number.isRequired
+    ).isRequired,
+    id: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired,
+    isFavorites: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    activePin: PropTypes.bool,
+    reviews: PropTypes.arrayOf(
+        PropTypes.exact({
+          author: PropTypes.string.isRequired,
+          review: PropTypes.string.isRequired,
+          userRating: PropTypes.number.isRequired,
+          date: PropTypes.string.isRequired
+        }).isRequired
+    ).isRequired
+  })
 };

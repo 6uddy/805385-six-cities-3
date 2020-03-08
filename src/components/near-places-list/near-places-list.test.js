@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {OffersCardList} from './offer-card-list.jsx';
+import {NearPlacesList} from './near-places-list.jsx';
 
 const TestData = {
   OFFERS: [
@@ -55,14 +55,13 @@ const TestData = {
   ]
 };
 
-it(`OffersCardList component structure test`, () => {
-  const tree = renderer
-    .create(
-        <OffersCardList
-          offers = {TestData.OFFERS}
-          onCardHeadingClick = {() => {}}
-        />
-    ).toJSON();
+it(`NearPlacesList component structure test`, () => {
+  const tree = renderer.create(
+      <NearPlacesList
+        offers = {TestData.OFFERS}
+        onCardHeadingClick = {() => {}}
+      />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
