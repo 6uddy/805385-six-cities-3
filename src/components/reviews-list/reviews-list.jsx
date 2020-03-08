@@ -7,7 +7,7 @@ export const ReviewsList = ({reviews}) => (
     {
       reviews.map((review) => (<ReviewItem
         reviewItem = {review}
-        key = {1}
+        key = {Math.random()}
       />))
     }
   </ul>
