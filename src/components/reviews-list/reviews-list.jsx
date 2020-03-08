@@ -7,7 +7,7 @@ export const ReviewsList = ({reviews}) => (
     {
       reviews.map((review) => (<ReviewItem
         reviewItem = {review}
-        key = {nanoid()}
+        key = {1}
       />))
     }
   </ul>
