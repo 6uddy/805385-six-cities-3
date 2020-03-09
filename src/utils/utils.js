@@ -15,3 +15,17 @@ export const ratingStyleConverter = (rating) => {
   }
   return style;
 };
+
+
+export const extend = (a, b = null) => {
+  return b !== null ? Object.assign({}, a, b) : Object.assign({}, a);
+};
+
+export const City = {
+  PARIS: `Paris`,
+  COLOGNE: `Cologne`,
+  BRUSSELS: `Brussels`,
+  AMSTERDAM: `Amsterdam`,
+  HAMBURG: `Hamburg`,
+  DUSSELDORF: `Dusselgorf`
+};

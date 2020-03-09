@@ -61,6 +61,8 @@ it(`Render main`, () => {
         <Main
           offers = {TestData.OFFERS}
           onCardHeadingClick = {() => {}}
+          selectedCity = {`Cologne`}
+          onCityTabClick = {() => {}}
         />
     ).toJSON();
 

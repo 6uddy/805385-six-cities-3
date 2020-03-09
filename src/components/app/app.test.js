@@ -56,13 +56,17 @@ const TestData = {
   ]
 };
 
-it(`Render app`, () => {
+it(`App test`, () => {
   const tree = renderer
     .create(
         <App
           offers = {TestData.OFFERS}
+          onCardHeadingClick = {() => {}}
+          selectedCity = {`Paris`}
+          onCityTabClick = {() => {}}
         />
     ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+
