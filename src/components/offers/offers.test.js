@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Offers} from './offers.jsx';
 
-const TestDataValue = {
+const TestData = {
   OFFERS: [
     {
       name: `Apartment overlooking the river`,
@@ -67,14 +67,20 @@ const TestDataValue = {
   ]
 };
 
+const OFFERS_SORT_TYPE = `Price: low to high`;
+
 it(`Offers component structure test`, () => {
   const tree = renderer
-  .create(
-      <Offers
-        offers = {TestDataValue.OFFERS}
-        onCardHeadingClick = {() => {}}
-      />
-  ).toJSON();
+    .create(
+        <Offers
+          offers = {TestData.OFFERS}
+          onCardHeadingClick = {() => {}}
+          offersSortType = {OFFERS_SORT_TYPE}
+          onSortOptionClick = {() => {}}
+          onOfferMouseInteract = {() => {}}
+        />
+    ).toJSON();
+
 
   expect(tree).toMatchSnapshot();
 });

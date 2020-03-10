@@ -55,14 +55,20 @@ const TestData = {
   ]
 };
 
-it(`Render main`, () => {
+const SELECTED_CITY = `Cologne`;
+const OFFERS_SORT_TYPE = `Price: low to high`;
+
+it(`Main component structure test`, () => {
   const tree = renderer
     .create(
         <Main
           offers = {TestData.OFFERS}
           onCardHeadingClick = {() => {}}
-          selectedCity = {`Cologne`}
+          selectedCity = {SELECTED_CITY}
           onCityTabClick = {() => {}}
+          offersSortType = {OFFERS_SORT_TYPE}
+          onSortOptionClick = {() => {}}
+          onOfferMouseInteract = {() => {}}
         />
     ).toJSON();
 

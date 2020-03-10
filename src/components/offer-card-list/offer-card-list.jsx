@@ -1,24 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {OfferCard} from '../offer-card/offer-card.jsx';
+import {SortOption} from '../../utils/utils.js';
+import {CompareDirection} from '../../utils/utils.js';
+import {compare} from '../../utils/utils.js';
 
 const RENDER_MODE_TO_MAIN = `toMain`;
+const OfferKey = {
+  PRICE: `price`,
+  RATING: `rating`
+};
+const getOffersBySortType = (sortType, offers) => {
+  switch (sortType) {
+    case SortOption.DEFAULT: return offers;
+    case SortOption.BY_PRICE_LOW_TO_HIGHT: return offers.sort(compare(OfferKey.PRICE, CompareDirection.DESC));
+    case SortOption.BY_PRICE_HIGHT_TO_LOW: return offers.sort(compare(OfferKey.PRICE, CompareDirection.ASC));
+    case SortOption.BY_RATING_HIGHT_TO_LOW: return offers.sort(compare(OfferKey.RATING, CompareDirection.ASC));
+  }
+  return offers;
+};
 
 export class OffersCardList extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      activeItemData: null
-    };
-    this.onOfferMouseInteract = this.onOfferMouseInteract.bind(this);
   }
   render() {
     return (
       <div className="cities__places-list places__list tabs__content">
         {
-          this.props.offers.map((offerItem) => <OfferCard
+          getOffersBySortType(this.props.offersSortType, this.props.offers).map((offerItem) => <OfferCard
             offer = {offerItem}
-            onOfferMouseInteract = {this.onOfferMouseInteract}
+            onOfferMouseInteract = {this.props.onOfferMouseInteract}
             onCardHeadingClick = {this.props.onCardHeadingClick}
             key = {offerItem.id}
             renderMode = {RENDER_MODE_TO_MAIN}
@@ -26,11 +38,6 @@ export class OffersCardList extends React.PureComponent {
         }
       </div>
     );
-  }
-  onOfferMouseInteract(activeItemData) {
-    this.setState({
-      activeItemData
-    });
   }
 }
 
@@ -57,5 +64,7 @@ OffersCardList.propTypes = {
         ).isRequired
       }).isRequired
   ).isRequired,
-  onCardHeadingClick: PropTypes.func.isRequired
+  onCardHeadingClick: PropTypes.func.isRequired,
+  offersSortType: PropTypes.string.isRequired,
+  onOfferMouseInteract: PropTypes.func.isRequired
 };

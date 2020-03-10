@@ -161,7 +161,7 @@ export const OfferCardDetails = ({offerCurrent, offers, onCardHeadingClick}) => 
         <section className="property__map map">
           <Map
             offers = {getCitiesOffersForMap(offerCurrent, offers)}
-            offerCurrent = {offerCurrent}
+            selectedOfferId = {offerCurrent.id}
           />
         </section>
       </section>

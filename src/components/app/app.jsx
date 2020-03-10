@@ -9,9 +9,6 @@ import {ActionCreator} from "../../reducer/reducer.js";
 export class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedOffer: null
-    };
   }
   render() {
     return (
@@ -44,6 +41,10 @@ export class App extends React.PureComponent {
       onCardHeadingClick = {this.props.onCardHeadingClick}
       selectedCity = {this.props.selectedCity}
       onCityTabClick = {this.props.onCityTabClick}
+      offersSortType = {this.props.offersSortType}
+      onSortOptionClick = {this.props.onSortOptionClick}
+      offerInMouseEnterId = {this.props.offerInMouseEnterId}
+      onOfferMouseInteract = {this.props.onOfferMouseInteract}
     />;
   }
 }
@@ -93,24 +94,37 @@ App.propTypes = {
         }).isRequired
     ).isRequired
   }),
-  selectedCity: PropTypes.string.isRequired
+  selectedCity: PropTypes.string.isRequired,
+  offersSortType: PropTypes.string.isRequired,
+  onSortOptionClick: PropTypes.func.isRequired,
+  offerInMouseEnterId: PropTypes.string,
+  onOfferMouseInteract: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
     selectedCity: state.selectedCity,
     offers: state.offers,
-    selectedOffer: state.currentOffer
+    selectedOffer: state.currentOffer,
+    offersSortType: state.offersSortType,
+    offerInMouseEnterId: state.offerInMouseEnterId
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onCardHeadingClick(selectedOffer) {
+    /* передать null для возврата к главному экрану */
     dispatch(ActionCreator.selectOffer(selectedOffer));
   },
   onCityTabClick(city) {
     dispatch(ActionCreator.changeCity(city));
     dispatch(ActionCreator.getCityOffers(city));
+  },
+  onSortOptionClick(sortType) {
+    dispatch(ActionCreator.changeOffersSortType(sortType));
+  },
+  onOfferMouseInteract(id) {
+    dispatch(ActionCreator.getOfferInMouseEnterId(id));
   }
 });
 

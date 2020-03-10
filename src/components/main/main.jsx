@@ -4,7 +4,7 @@ import {CitiesTabs} from '../cities-tabs/cities-tabs.jsx';
 import {Offers} from '../offers/offers.jsx';
 import {OffersEmpty} from '../offers-empty/offers-empty.jsx';
 
-export const Main = ({offers, onCardHeadingClick, selectedCity, onCityTabClick}) => (
+export const Main = ({offers, onCardHeadingClick, selectedCity, onCityTabClick, offersSortType, onSortOptionClick, offerInMouseEnterId, onOfferMouseInteract}) => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -38,6 +38,10 @@ export const Main = ({offers, onCardHeadingClick, selectedCity, onCityTabClick})
       {offers.length !== 0 && <Offers
         offers = {offers}
         onCardHeadingClick = {onCardHeadingClick}
+        offersSortType = {offersSortType}
+        onSortOptionClick = {onSortOptionClick}
+        offerInMouseEnterId = {offerInMouseEnterId}
+        onOfferMouseInteract = {onOfferMouseInteract}
       />}
       {offers.length === 0 && <OffersEmpty
         selectedCity = {selectedCity}
@@ -50,5 +54,9 @@ Main.propTypes = {
   offers: PropTypes.array.isRequired,
   selectedCity: PropTypes.string.isRequired,
   onCardHeadingClick: PropTypes.func.isRequired,
-  onCityTabClick: PropTypes.func.isRequired
+  onCityTabClick: PropTypes.func.isRequired,
+  offersSortType: PropTypes.string.isRequired,
+  onSortOptionClick: PropTypes.func.isRequired,
+  offerInMouseEnterId: PropTypes.string,
+  onOfferMouseInteract: PropTypes.func.isRequired
 };

@@ -1,16 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {City} from '../../utils/utils.js';
-
-const getCitiesList = (cities) => {
-  const citiesList = [];
-  for (let cityName in cities) {
-    if (City[cityName]) {
-      citiesList.push(cities[cityName]);
-    }
-  }
-  return citiesList;
-};
+import {getValuesListFromEnum} from '../../utils/utils.js';
 
 export class CitiesTabs extends React.PureComponent {
   render() {
@@ -19,9 +10,9 @@ export class CitiesTabs extends React.PureComponent {
         <section className="locations container">
           <ul className="locations__list tabs__list">
             {
-              getCitiesList(City).map((city) => (
+              getValuesListFromEnum(City).map((city) => (
                 <li className="locations__item" key={Math.random()}>
-                  <a className={this.props.selectedCity === city ? `locations__item-link tabs__item tabs__item--active` : `locations__item-link tabs__item`} onClick={() => this.props.onCityTabClick(city)} href="#">
+                  <a className={`locations__item-link tabs__item${this.props.selectedCity === city ? ` tabs__item--active` : ``}`} onClick={() => this.props.onCityTabClick(city)} href="#">
                     <span>{city}</span>
                   </a>
                 </li>)

@@ -56,14 +56,20 @@ const TestData = {
   ]
 };
 
-it(`App test`, () => {
+const SELECTED_CITY = `Paris`;
+const OFFERS_SORT_TYPE = `Price: low to high`;
+
+it(`App component structure test`, () => {
   const tree = renderer
     .create(
         <App
           offers = {TestData.OFFERS}
           onCardHeadingClick = {() => {}}
-          selectedCity = {`Paris`}
+          selectedCity = {SELECTED_CITY}
           onCityTabClick = {() => {}}
+          offersSortType = {OFFERS_SORT_TYPE}
+          onSortOptionClick = {() => {}}
+          onOfferMouseInteract = {() => {}}
         />
     ).toJSON();
 
