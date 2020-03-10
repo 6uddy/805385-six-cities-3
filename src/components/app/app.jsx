@@ -38,13 +38,11 @@ export class App extends React.PureComponent {
     }
     return <Main
       offers = {this.props.offers}
-      onCardHeadingClick = {this.props.onCardHeadingClick}
       selectedCity = {this.props.selectedCity}
       onCityTabClick = {this.props.onCityTabClick}
       offersSortType = {this.props.offersSortType}
       onSortOptionClick = {this.props.onSortOptionClick}
       offerInMouseEnterId = {this.props.offerInMouseEnterId}
-      onOfferMouseInteract = {this.props.onOfferMouseInteract}
     />;
   }
 }
@@ -97,19 +95,16 @@ App.propTypes = {
   selectedCity: PropTypes.string.isRequired,
   offersSortType: PropTypes.string.isRequired,
   onSortOptionClick: PropTypes.func.isRequired,
-  offerInMouseEnterId: PropTypes.string,
-  onOfferMouseInteract: PropTypes.func.isRequired
+  offerInMouseEnterId: PropTypes.number
 };
 
-const mapStateToProps = (state) => {
-  return {
-    selectedCity: state.selectedCity,
-    offers: state.offers,
-    selectedOffer: state.currentOffer,
-    offersSortType: state.offersSortType,
-    offerInMouseEnterId: state.offerInMouseEnterId
-  };
-};
+const mapStateToProps = (state) => ({
+  selectedCity: state.selectedCity,
+  offers: state.offers,
+  selectedOffer: state.currentOffer,
+  offersSortType: state.offersSortType,
+  offerInMouseEnterId: state.offerInMouseEnterId
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onCardHeadingClick(selectedOffer) {
@@ -122,11 +117,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSortOptionClick(sortType) {
     dispatch(ActionCreator.changeOffersSortType(sortType));
-  },
-  onOfferMouseInteract(id) {
-    dispatch(ActionCreator.getOfferInMouseEnterId(id));
+    dispatch(ActionCreator.sortOffers(sortType));
   }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

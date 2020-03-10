@@ -3,30 +3,22 @@ import PropTypes from 'prop-types';
 import {OfferCard} from '../offer-card/offer-card.jsx';
 
 const RENDER_MODE_TO_NEAR = `toNear`;
+const NearPlacesListComponent = ({offers, onCardHeadingClick}) => (
+  <div className="near-places__list places__list">
+    {
+      offers.map((offerItem) => <OfferCard
+        offer = {offerItem}
+        onOfferMouseInteract = {() => {}}
+        onCardHeadingClick = {onCardHeadingClick}
+        key = {offerItem.id}
+        renderMode = {RENDER_MODE_TO_NEAR}
+      />)
+    }
+  </div>
+);
+export const NearPlacesList = React.memo(NearPlacesListComponent);
 
-export class NearPlacesList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="near-places__list places__list">
-        {
-          this.props.offers.map((offerItem) => <OfferCard
-            offer = {offerItem}
-            onOfferMouseInteract = {() => {}}
-            onCardHeadingClick = {this.props.onCardHeadingClick}
-            key = {offerItem.id}
-            renderMode = {RENDER_MODE_TO_NEAR}
-          />)
-        }
-      </div>
-    );
-  }
-}
-
-NearPlacesList.propTypes = {
+NearPlacesListComponent.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.exact({
         name: PropTypes.string.isRequired,

@@ -5,7 +5,7 @@ import {OfferCard} from "./offer-card.jsx";
 const TestData = {
   OFFER: {
     name: `Nice, cozy, warm big bed apartment`,
-    coordinates: [52.3809553943508, 4.939309666406198],
+    coordinates: [],
     id: 1,
     price: 145,
     type: `Lux apartment`,

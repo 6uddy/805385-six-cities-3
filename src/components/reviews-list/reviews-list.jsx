@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {ReviewItem} from '../review-item/review-item.jsx';
 
-export const ReviewsList = ({reviews}) => (
+const ReviewsListComponent = ({reviews}) => (
   <ul className="reviews__list">
     {
       reviews.map((review) => (<ReviewItem
@@ -12,8 +12,9 @@ export const ReviewsList = ({reviews}) => (
     }
   </ul>
 );
+export const ReviewsList = React.memo(ReviewsListComponent);
 
-ReviewsList.propTypes = {
+ReviewsListComponent.propTypes = {
   reviews: PropTypes.arrayOf(
       PropTypes.exact({
         id: PropTypes.number.isRequired,

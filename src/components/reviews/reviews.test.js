@@ -5,7 +5,7 @@ import {Reviews} from './reviews.jsx';
 const TestData = {
   REVIEW: {
     name: `Prinsengracht`,
-    coordinates: [52.3909553943508, 4.929309666406198],
+    coordinates: [],
     id: 1,
     price: 74,
     type: `Motel`,
