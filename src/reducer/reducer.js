@@ -2,8 +2,6 @@ import {extend} from '../utils/utils.js';
 import {DataValue} from '../mocks/offers.js';
 import {City} from '../utils/utils.js';
 import {SortOption} from '../utils/utils.js';
-import {CompareDirection} from '../utils/utils.js';
-import {compare} from '../utils/utils.js';
 
 const initialState = {
   selectedCity: City.PARIS,
@@ -13,37 +11,11 @@ const initialState = {
   offersSortType: SortOption.DEFAULT,
   offerInMouseEnterId: null
 };
-const OfferKey = {
-  PRICE: `price`,
-  RATING: `rating`
-};
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   SELECT_OFFER: `SELECT_OFFER`,
-  GET_CITY_OFFERS: `GET_CITY_OFFERS`,
   CHANGE_OFFERS_SORT_TYPE: `CHANGE_OFFERS_SORT_TYPE`,
-  GET_OFFER_IN_MOUSE_ENTER_ID: `GET_OFFER_IN_MOUSE_ENTER_ID`,
-  GET_SORTED_OFFERS: `GET_SORTED_OFFERS`
-};
-const getSelectedCityOffers = (city) => {
-  switch (city) {
-    case City.PARIS: return DataValue.OFFERS_MOCK;
-    case City.COLOGNE: return [];
-    case City.BRUSSELS: return DataValue.OFFERS_MOCK;
-    case City.AMSTERDAM: return DataValue.OFFERS_MOCK;
-    case City.HAMBURG: return DataValue.OFFERS_MOCK;
-    case City.DUSSELDORF: return DataValue.OFFERS_MOCK;
-  }
-  return null;
-};
-const getSortedOffers = (sortType) => {
-  switch (sortType) {
-    case SortOption.DEFAULT: return DataValue.OFFERS_MOCK;
-    case SortOption.BY_PRICE_LOW_TO_HIGHT: return DataValue.OFFERS_MOCK.sort(compare(OfferKey.PRICE, CompareDirection.DESC));
-    case SortOption.BY_PRICE_HIGHT_TO_LOW: return DataValue.OFFERS_MOCK.sort(compare(OfferKey.PRICE, CompareDirection.ASC));
-    case SortOption.BY_RATING_HIGHT_TO_LOW: return DataValue.OFFERS_MOCK.sort(compare(OfferKey.RATING, CompareDirection.ASC));
-  }
-  return DataValue.OFFERS_MOCK;
+  GET_OFFER_ID: `GET_OFFER_ID`
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -55,21 +27,13 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentOffer: action.payload
       });
-    case ActionType.GET_CITY_OFFERS:
-      return extend(state, {
-        offers: getSelectedCityOffers(action.payload)
-      });
     case ActionType.CHANGE_OFFERS_SORT_TYPE:
       return extend(state, {
         offersSortType: action.payload
       });
-    case ActionType.GET_OFFER_IN_MOUSE_ENTER_ID:
+    case ActionType.GET_OFFER_ID:
       return extend(state, {
         offerInMouseEnterId: action.payload
-      });
-    case ActionType.GET_SORTED_OFFERS:
-      return extend(state, {
-        sortedOffers: getSortedOffers(action.payload)
       });
   }
   return state;
@@ -83,21 +47,13 @@ const ActionCreator = {
     type: ActionType.SELECT_OFFER,
     payload: value
   }),
-  getCityOffers: (city) => ({
-    type: ActionType.GET_CITY_OFFERS,
-    payload: city
-  }),
   changeOffersSortType: (type) => ({
     type: ActionType.CHANGE_OFFERS_SORT_TYPE,
     payload: type
   }),
-  getOfferInMouseEnterId: (id) => ({
-    type: ActionType.GET_OFFER_IN_MOUSE_ENTER_ID,
+  getOfferId: (id) => ({
+    type: ActionType.GET_OFFER_ID,
     payload: id
-  }),
-  sortOffers: (sortType) => ({
-    type: ActionType.GET_SORTED_OFFERS,
-    payload: sortType
   })
 };
 
