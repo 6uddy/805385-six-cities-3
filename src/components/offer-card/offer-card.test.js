@@ -1,51 +1,52 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {OfferCard} from "./offer-card.jsx";
+import {MemorizedOfferCard} from "./offer-card.jsx";
 
-const TestData = {
-  OFFER: {
-    name: `Nice, cozy, warm big bed apartment`,
-    coordinates: [],
-    id: 1,
-    price: 145,
-    type: `Lux apartment`,
-    premium: true,
-    isFavorites: true,
-    rating: 3.5,
-    reviews: [
-      {
-        author: `Hanna`,
-        review: `Unique lightness of Amsterdam. The building is green and from 18th century.`,
-        userRating: 1,
-        date: `April 2017`
-      },
-      {
-        author: `Bill`,
-        review: `A quiet cozy and picturesque that.`,
-        userRating: 0,
-        date: `January 2018`
-      },
-      {
-        author: `Ed`,
-        review: `The building is green and from 18th century.`,
-        userRating: 3,
-        date: `September 2019`
-      }
-    ]
-  }
+const card = {
+  id: 0,
+  city: {
+    location: {
+      latitude: 48.85661,
+      longitude: 2.351499,
+      zoom: 13,
+    },
+    name: `Paris`,
+  },
+  previewImage: `/img/apartment-01.jpg`,
+  images: [`/img/apartment-01.jpg`, `/img/room.jpg`],
+  title: `Canal View Prinsengracht`,
+  isFavorite: false,
+  isPremium: false,
+  rating: 3.5,
+  type: `house`,
+  bedrooms: 3,
+  maxAdults: 8,
+  price: 573,
+  description: `A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.`,
+  goods: [`Air conditioning`, `Breakfast`, `Towels`, `Baby seat`, `Washer`, `Washing machine`, `Dishwasher`, `Dishwasher`, `Coffee machine`, `Laptop friendly workspace`, `Fridge`],
+  host: {
+    id: 25,
+    name: `Angelina`,
+    isPro: true,
+    avatarUrl: `/img/avatar-angelina.jpg`,
+  },
+  location: {
+    latitude: 48.837610000000005,
+    longitude: 2.364499,
+    zoom: 16,
+  },
 };
-const RENDER_MODE_TO_MAIN = `toMain`;
 
-it(`OfferCard component structure test`, () => {
+it(`Test MemorizedOfferCard card`, () => {
+
   const tree = renderer
     .create(
-        <OfferCard
-          offer = {TestData.OFFER}
-          onOfferMouseInteract = {() => {}}
-          onCardHeadingClick = {() => {}}
-          renderMode = {RENDER_MODE_TO_MAIN}
+        <MemorizedOfferCard
+          card={card}
+          setSelectedCard={()=>{}}
+          isDetail={false}
         />
-    ).toJSON();
-
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

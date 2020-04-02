@@ -1,97 +1,182 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import leaflet from 'leaflet';
+import React, {PureComponent, createRef} from "react";
+import PropTypes from "prop-types";
+import leaflet from "leaflet";
+import {UNSELECTED_CARD_ID} from "../../const.js";
+import {getCard} from "../../utils";
 
-const MapSetting = {
-  CITY: [52.38333, 4.9],
-  ZOOM: 12
-};
 
-export class Map extends React.PureComponent {
+export default class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.mapRef = React.createRef();
-  }
-  componentDidMount() {
-    if (this.mapRef.current) {
-      this.mapInit(this.mapRef.current);
-    }
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.selectedOfferId !== prevProps.selectedOfferId) {
-      this.updatePins();
-    }
-  }
-  render() {
-    return (
-      <div id="map" style={{height: `100%`}} ref={this.mapRef}></div>
-    );
-  }
-  getPinIcon(offer) {
-    return leaflet.icon({
-      iconUrl: this.props.selectedOfferId && offer.id === this.props.selectedOfferId ? `img/pin-active.svg` : `img/pin.svg`,
+
+    this._mapRef = createRef();
+    this.markers = [];
+
+    this._icon = leaflet.icon({
+      iconUrl: `/img/pin.svg`,
+      iconSize: [30, 30]
+    });
+
+    this._iconActive = leaflet.icon({
+      iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30]
     });
   }
-  updatePins() {
-    if (this.map !== null) {
-      this.pins.forEach((pin) => {
-        this.map.removeLayer(pin);
-      });
-    }
-    this.addPinsToMap();
-  }
-  addPinsToMap() {
-    this.pins = [];
-    this.props.offers.forEach((offerItem) => {
-      const pin = leaflet.marker(offerItem.coordinates, {icon: this.getPinIcon(offerItem)})
+
+  _addMarkers(similarOffers, selectedCardId) {
+    this.markers = similarOffers.filter((cardItem) => cardItem.id !== selectedCardId).map((similarOffer) => {
+      const coordinates = [similarOffer.location.latitude, similarOffer.location.longitude];
+      return leaflet
+        .marker(coordinates, {icon: this._icon})
         .addTo(this.map);
-      this.pins.push(pin);
     });
   }
-  mapInit(mapCurrent) {
-    if (!mapCurrent) {
-      throw new Error(`no mapCurrent`);
+
+  _addSelectedMarker(cards, selectedCardId) {
+    if (selectedCardId !== UNSELECTED_CARD_ID) {
+      const selectedCard = getCard(selectedCardId, cards);
+      const coordinates = [selectedCard.location.latitude, selectedCard.location.longitude];
+      this.markers.push(
+          leaflet
+            .marker(coordinates, {icon: this._iconActive})
+            .addTo(this.map)
+      );
     }
-    this.map = leaflet.map(mapCurrent, {
-      center: MapSetting.CITY,
-      zoom: MapSetting.ZOOM,
-      zoomControl: false,
-      marker: true
-    });
-    this.map.setView(MapSetting.CITY, MapSetting.ZOOM);
-    leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(this.map);
-    this.addPinsToMap();
+  }
+
+  componentDidMount() {
+    const {cards, similarOffers, selectedCardId} = this.props;
+    const card = cards[0];
+    const {location} = card.city;
+    const cityCoordinates = [location.latitude, location.longitude];
+    const cityZoom = location.zoom;
+
+    if (this._mapRef.current) {
+      this.map = leaflet.map(this._mapRef.current, {
+        center: cityCoordinates,
+        zoom: cityZoom,
+        zoomControl: false,
+        marker: true
+      });
+
+      this.map.setView(cityCoordinates, cityZoom);
+
+      leaflet
+        .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+          attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+        })
+        .addTo(this.map);
+
+      this._addMarkers(similarOffers, selectedCardId);
+
+      this._addSelectedMarker(cards, selectedCardId);
+    }
+  }
+
+  componentDidUpdate() {
+    const {cards, similarOffers, selectedCardId} = this.props;
+    const card = cards[0];
+    const {location} = card.city;
+    const cityCoordinates = [location.latitude, location.longitude];
+    const cityZoom = location.zoom;
+
+    if (this._mapRef.current) {
+      this.map.setView(cityCoordinates, cityZoom);
+
+      this.markers.forEach((marker) => marker.remove());
+
+      this._addMarkers(similarOffers, selectedCardId);
+
+      this._addSelectedMarker(cards, selectedCardId);
+    }
+  }
+
+  componentWillUnmount() {
+    this.map.remove();
+    this.map = null;
+  }
+
+  render() {
+    const {sectionClassName} = this.props;
+    return (
+      <section ref={this._mapRef} className={`${sectionClassName} map`} />
+    );
   }
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(
+  cards: PropTypes.arrayOf(
       PropTypes.exact({
-        name: PropTypes.string.isRequired,
-        coordinates: PropTypes.arrayOf(
-            PropTypes.number.isRequired
-        ).isRequired,
         id: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }).isRequired,
+          name: PropTypes.string.isRequired,
+        }).isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        images: PropTypes.array.isRequired,
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.array.isRequired,
+        host: PropTypes.exact({
+          id: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired,
+          avatarUrl: PropTypes.string.isRequired,
+          isPro: PropTypes.bool.isRequired
+        }).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.exact({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired,
+        }).isRequired,
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        premium: PropTypes.bool.isRequired,
-        isFavorites: PropTypes.bool.isRequired,
         rating: PropTypes.number.isRequired,
-        activePin: PropTypes.bool,
-        reviews: PropTypes.arrayOf(
-            PropTypes.exact({
-              author: PropTypes.string.isRequired,
-              review: PropTypes.string.isRequired,
-              userRating: PropTypes.number.isRequired,
-              date: PropTypes.string.isRequired
-            }).isRequired
-        ).isRequired
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  selectedOfferId: PropTypes.number
+  similarOffers: PropTypes.arrayOf(
+      PropTypes.exact({
+        id: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }).isRequired,
+          name: PropTypes.string.isRequired,
+        }).isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        images: PropTypes.array.isRequired,
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.array.isRequired,
+        host: PropTypes.exact({
+          id: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired,
+          avatarUrl: PropTypes.string.isRequired,
+          isPro: PropTypes.bool.isRequired
+        }).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.exact({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired,
+        }).isRequired,
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+      }).isRequired
+  ).isRequired,
+  selectedCardId: PropTypes.number.isRequired,
+  sectionClassName: PropTypes.string.isRequired
 };

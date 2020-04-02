@@ -1,18 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OfferCard component structure test 1`] = `
+exports[`Test MemorizedOfferCard card 1`] = `
 <article
   className="cities__place-card place-card"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
-    className="place-card__mark"
-  >
-    <span>
-      Premium
-    </span>
-  </div>
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
@@ -23,7 +16,7 @@ exports[`OfferCard component structure test 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
+        src="/img/apartment-01.jpg"
         width="260"
       />
     </a>
@@ -41,7 +34,7 @@ exports[`OfferCard component structure test 1`] = `
           className="place-card__price-value"
         >
           €
-          145
+          573
         </b>
         <span
           className="place-card__price-text"
@@ -50,7 +43,7 @@ exports[`OfferCard component structure test 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button place-card__bookmark-button--active"
+        className="place-card__bookmark-button  button"
         type="button"
       >
         <svg
@@ -65,7 +58,7 @@ exports[`OfferCard component structure test 1`] = `
         <span
           className="visually-hidden"
         >
-          To bookmarks
+          In bookmarks
         </span>
       </button>
     </div>
@@ -78,7 +71,7 @@ exports[`OfferCard component structure test 1`] = `
         <span
           style={
             Object {
-              "width": "60%",
+              "width": "70%",
             }
           }
         />
@@ -91,18 +84,17 @@ exports[`OfferCard component structure test 1`] = `
     </div>
     <h2
       className="place-card__name"
-      onClick={[Function]}
     >
       <a
-        href="#"
+        href="/offer/0"
       >
-        Nice, cozy, warm big bed apartment
+        Canal View Prinsengracht
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Lux apartment
+      House
     </p>
   </div>
 </article>

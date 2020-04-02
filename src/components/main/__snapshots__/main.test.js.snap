@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main component structure test 1`] = `
+exports[`Test Main component 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -17,13 +17,14 @@ exports[`Main component structure test 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link header__logo-link--active"
+            className="header__logo-link"
+            href="/"
           >
             <img
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width="81"
             />
           </a>
@@ -39,15 +40,15 @@ exports[`Main component structure test 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
                 >
-                  Oliver.conner@gmail.com
+                  Sign in
                 </span>
               </a>
             </li>
@@ -57,7 +58,7 @@ exports[`Main component structure test 1`] = `
     </div>
   </header>
   <main
-    className="page__main page__main--index"
+    className="page__main page__main--index "
   >
     <h1
       className="visually-hidden"
@@ -77,77 +78,12 @@ exports[`Main component structure test 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Paris
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
               className="locations__item-link tabs__item tabs__item--active"
               href="#"
               onClick={[Function]}
             >
               <span>
-                Cologne
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Brussels
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Hamburg
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Dusselgorf
+                Paris
               </span>
             </a>
           </li>
@@ -173,7 +109,7 @@ exports[`Main component structure test 1`] = `
           >
             2
              places to stay in 
-            Cologne
+            Paris
           </b>
           <form
             action="#"
@@ -183,13 +119,14 @@ exports[`Main component structure test 1`] = `
             <span
               className="places__sorting-caption"
             >
-              Sort by
+              Sort by 
             </span>
             <span
               className="places__sorting-type"
+              onClick={[Function]}
               tabIndex="0"
             >
-              Price: low to high
+              Popular
               <svg
                 className="places__sorting-arrow"
                 height="4"
@@ -201,31 +138,31 @@ exports[`Main component structure test 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom places__options--opened"
+              className="places__options places__options--custom "
             >
               <li
-                className="places__option"
+                className="places__option places__option--active"
                 onClick={[Function]}
                 tabIndex="0"
               >
                 Popular
               </li>
               <li
-                className="places__option places__option--active"
+                className="places__option "
                 onClick={[Function]}
                 tabIndex="0"
               >
                 Price: low to high
               </li>
               <li
-                className="places__option"
+                className="places__option "
                 onClick={[Function]}
                 tabIndex="0"
               >
                 Price: high to low
               </li>
               <li
-                className="places__option"
+                className="places__option "
                 onClick={[Function]}
                 tabIndex="0"
               >
@@ -242,13 +179,6 @@ exports[`Main component structure test 1`] = `
               onMouseLeave={[Function]}
             >
               <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
-              <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
@@ -258,7 +188,7 @@ exports[`Main component structure test 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="/img/apartment-01.jpg"
                     width="260"
                   />
                 </a>
@@ -276,7 +206,7 @@ exports[`Main component structure test 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      120
+                      573
                     </b>
                     <span
                       className="place-card__price-text"
@@ -285,7 +215,7 @@ exports[`Main component structure test 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className="place-card__bookmark-button  button"
                     type="button"
                   >
                     <svg
@@ -300,7 +230,7 @@ exports[`Main component structure test 1`] = `
                     <span
                       className="visually-hidden"
                     >
-                      To bookmarks
+                      In bookmarks
                     </span>
                   </button>
                 </div>
@@ -313,7 +243,7 @@ exports[`Main component structure test 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "70%",
                         }
                       }
                     />
@@ -326,206 +256,9 @@ exports[`Main component structure test 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
-                    href="#"
-                  >
-                    Beautiful & luxurious apartment at great location
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  Apartment
-                </p>
-              </div>
-            </article>
-            <article
-              className="cities__place-card place-card"
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="cities__image-wrapper place-card__image-wrapper"
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/apartment-01.jpg"
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €
-                      150
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button button"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      To bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "80%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                  onClick={[Function]}
-                >
-                  <a
-                    href="#"
-                  >
-                    Wood and stone place
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  Room
-                </p>
-              </div>
-            </article>
-            <article
-              className="cities__place-card place-card"
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="cities__image-wrapper place-card__image-wrapper"
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/apartment-01.jpg"
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €
-                      100
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button button place-card__bookmark-button--active"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      To bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "40%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                  onClick={[Function]}
-                >
-                  <a
-                    href="#"
+                    href="/offer/0"
                   >
                     Canal View Prinsengracht
                   </a>
@@ -533,7 +266,7 @@ exports[`Main component structure test 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Hotel room
+                  House
                 </p>
               </div>
             </article>
@@ -542,13 +275,6 @@ exports[`Main component structure test 1`] = `
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
-              <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
@@ -559,7 +285,7 @@ exports[`Main component structure test 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="/img/apartment-01.jpg"
                     width="260"
                   />
                 </a>
@@ -577,7 +303,7 @@ exports[`Main component structure test 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      170
+                      337
                     </b>
                     <span
                       className="place-card__price-text"
@@ -586,7 +312,7 @@ exports[`Main component structure test 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button place-card__bookmark-button--active"
+                    className="place-card__bookmark-button  button"
                     type="button"
                   >
                     <svg
@@ -601,7 +327,7 @@ exports[`Main component structure test 1`] = `
                     <span
                       className="visually-hidden"
                     >
-                      To bookmarks
+                      In bookmarks
                     </span>
                   </button>
                 </div>
@@ -614,7 +340,7 @@ exports[`Main component structure test 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "60%",
+                          "width": "56%",
                         }
                       }
                     />
@@ -627,18 +353,17 @@ exports[`Main component structure test 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
-                    href="#"
+                    href="/offer/1"
                   >
-                    Nice, cozy, warm big bed apartment
+                    Canal View Prinsengracht
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Lux apartment
+                  Hotel
                 </p>
               </div>
             </article>
@@ -649,16 +374,7 @@ exports[`Main component structure test 1`] = `
         >
           <section
             className="cities__map map"
-          >
-            <div
-              id="map"
-              style={
-                Object {
-                  "height": "100%",
-                }
-              }
-            />
-          </section>
+          />
         </div>
       </div>
     </div>
